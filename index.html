@@ -1,23 +1,818 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Resume</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>National Immunisation & Ayurveda Portal | Ministry of Health and Family Welfare, India</title>
+  <style>
+    /* Base Reset & Fonts */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', 'Noto Sans', sans-serif;
+    }
+    :root {
+      --primary: #138808; /* India green */
+      --secondary: #FF9933; /* India saffron */
+      --accent: #000080; /* Deep blue */
+      --light: #f8f8f8;
+      --dark: #333;
+      --white: #ffffff;
+      --gray: #6c757d;
+    }
+    body {
+      color: var(--dark);
+      line-height: 1.6;
+      background-color: var(--light);
+    }
+    a { text-decoration: none; }
+    
+    /* Top Bar */
+    .top-bar {
+      background-color: var(--accent);
+      color: var(--white);
+      padding: 8px 0;
+      font-size: 0.9rem;
+    }
+    .top-bar-inner {
+      display: flex;
+      justify-content: space-between;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    .gov-logo {
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+    }
+    .gov-logo img {
+      height: 24px;
+      margin-right: 10px;
+    }
+    .top-nav ul {
+      display: flex;
+      list-style: none;
+      align-items: center;
+    }
+    .top-nav li {
+      margin-left: 20px;
+    }
+    .top-nav a { color: var(--white); }
+    .language-selector select {
+      appearance: none;
+      background: transparent;
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      padding: 5px 25px 5px 10px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .language-selector::after {
+      content: '▼';
+      font-size: 0.7em;
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      pointer-events: none;
+    }
+    
+    /* Main Header & Navigation */
+    .main-header {
+      background-color: var(--primary);
+      color: var(--white);
+      padding: 15px 0;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    .main-header-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    .site-title {
+      font-size: 1.8rem;
+      font-weight: bold;
+    }
+    .main-nav ul {
+      display: flex;
+      list-style: none;
+    }
+    .main-nav li {
+      margin-left: 30px;
+      position: relative;
+    }
+    .main-nav a {
+      color: var(--white);
+      font-weight: 500;
+      padding: 5px 0;
+      border-bottom: 2px solid transparent;
+      transition: all 0.3s ease;
+    }
+    .main-nav a:hover {
+      border-bottom: 2px solid var(--white);
+    }
+    
+    /* Search Bar */
+    .search-container {
+      background-color: var(--white);
+      padding: 15px 0;
+      border-bottom: 1px solid #ddd;
+    }
+    .search-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+      display: flex;
+    }
+    .search-box {
+      flex-grow: 1;
+      display: flex;
+      border-radius: 50px;
+      overflow: hidden;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+    .search-box input {
+      flex-grow: 1;
+      padding: 12px 20px;
+      border: none;
+      outline: none;
+      font-size: 16px;
+    }
+    .search-box button {
+      padding: 12px 25px;
+      background-color: var(--secondary);
+      color: var(--dark);
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+    .search-box button:hover {
+      background-color: #e88a2e;
+    }
+    
+    /* Page Container & Pages */
+    #page-container {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+    .page { display: none; }
+    .page.active { display: block; }
+    .section-title {
+      text-align: center;
+      margin-bottom: 40px;
+      position: relative;
+      padding-bottom: 15px;
+    }
+    .section-title h2 {
+      color: var(--primary);
+      font-size: 2rem;
+    }
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 80px;
+      height: 3px;
+      background-color: var(--secondary);
+    }
+    
+    /* Info Cards Section (for Home page) */
+    .info-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 25px;
+      margin-bottom: 50px;
+    }
+    .card {
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      transition: all 0.3s ease;
+      background-color: var(--white);
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+    .card-img {
+      height: 180px;
+      overflow: hidden;
+    }
+    .card-img img {
+      transition: transform 0.5s ease;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .card:hover .card-img img {
+      transform: scale(1.05);
+    }
+    .card-content {
+      padding: 25px;
+    }
+    .card h3 {
+      color: var(--primary);
+      margin-bottom: 12px;
+      font-size: 1.3rem;
+    }
+    .card p {
+      margin-bottom: 20px;
+      color: var(--gray);
+    }
+    .card .btn {
+      display: inline-block;
+      padding: 10px 20px;
+      background-color: var(--secondary);
+      color: var(--white);
+      border-radius: 50px;
+      font-weight: 500;
+      transition: all 0.3s ease;
+    }
+    .card .btn:hover {
+      background-color: #e88a2e;
+    }
+    
+    /* Additional pages styling (dummy content) */
+    .page-content {
+      padding: 20px;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.05);
+      margin-bottom: 50px;
+    }
+    
+    /* Footer */
+    footer {
+      background-color: var(--accent);
+      color: var(--white);
+      padding: 60px 0 20px;
+    }
+    .footer-inner {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 40px;
+      margin-bottom: 50px;
+    }
+    .footer-col h3 {
+      margin-bottom: 20px;
+      font-size: 1.2rem;
+      position: relative;
+      padding-bottom: 10px;
+    }
+    .footer-col h3::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 40px;
+      height: 2px;
+      background-color: var(--secondary);
+    }
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 10px; }
+    .footer-col a {
+      color: rgba(255, 255, 255, 0.8);
+      transition: all 0.3s ease;
+    }
+    .footer-col a:hover {
+      color: var(--white);
+      padding-left: 5px;
+    }
+    
+    /* Chatbot Styles */
+    #chatbot {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 300px;
+      max-height: 400px;
+      background: var(--white);
+      border: 1px solid #ddd;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      border-radius: 8px;
+      display: none;
+      flex-direction: column;
+      z-index: 1000;
+    }
+    #chatbot-header {
+      background: var(--primary);
+      color: var(--white);
+      padding: 10px;
+      border-radius: 8px 8px 0 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    #chatbot-header span { cursor: pointer; }
+    #chatbot-messages {
+      padding: 10px;
+      flex: 1;
+      overflow-y: auto;
+      font-size: 0.9rem;
+    }
+    #chatbot-prompts {
+      padding: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+    }
+    #chatbot-prompts button {
+      background: var(--secondary);
+      border: none;
+      padding: 5px 8px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 0.8rem;
+      color: var(--dark);
+    }
+    #chatbot-input {
+      display: flex;
+      border-top: 1px solid #ddd;
+    }
+    #chatbot-input input {
+      flex: 1;
+      padding: 8px;
+      border: none;
+      outline: none;
+      font-size: 0.9rem;
+    }
+    #chatbot-input button {
+      background: var(--secondary);
+      border: none;
+      color: var(--dark);
+      padding: 8px 12px;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+    #chatbot-toggle {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background: var(--primary);
+      color: var(--white);
+      border: none;
+      padding: 10px;
+      border-radius: 50%;
+      cursor: pointer;
+      z-index: 1001;
+    }
+    
+    /* Responsive adjustments */
+    @media (max-width: 992px) {
+      .site-title { font-size: 1.5rem; }
+      .main-nav li { margin-left: 20px; }
+    }
+    @media (max-width: 768px) {
+      .top-nav, .main-nav { display: none; }
+    }
+    
+    /* Animation */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .card, .resource-item {
+      animation: fadeIn 0.5s ease forwards;
+    }
+    /* Ayurveda Page Animations */
+    .ayurveda-section {
+      animation: fadeIn 0.5s ease forwards;
+      margin-bottom: 50px;
+      padding: 20px;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+    }
+    .ayurveda-section h3 {
+      color: var(--primary);
+      margin-bottom: 15px;
+    }
+    .ayurveda-section p {
+      color: var(--gray);
+      margin-bottom: 10px;
+    }
+    .ayurveda-section ul {
+      margin-left: 20px;
+      list-style-type: disc;
+    }
+    .ayurveda-section ul li {
+      margin-bottom: 8px;
+    }
+  </style>
 </head>
 <body>
-    <div class="file">
-    <div class="container">
-        <div class="header">
-            <div class="name">
-        <h1>Garvit Arora</h1>
-        <h3 class="location">New Delhi, India</h3>
+  <!-- Top Bar -->
+  <div class="top-bar">
+    <div class="top-bar-inner">
+      <div class="gov-logo">
+        <img src="/api/placeholder/24/24" alt="Emblem of India" />
+        Government of India | Ministry of Health and Family Welfare
+      </div>
+      <nav class="top-nav">
+        <ul>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Contact</a></li>
+          <li><a href="#">RTI</a></li>
+          <li><a href="#">Sitemap</a></li>
+          <li class="language-selector">
+            <select>
+              <option value="en">English</option>
+              <option value="hi">हिन्दी</option>
+              <option value="bn">বাংলা</option>
+              <option value="te">తెలుగు</option>
+              <option value="ta">தமிழ்</option>
+              <option value="mr">मराठी</option>
+            </select>
+          </li>
+        </ul>
+      </nav>
     </div>
+  </div>
+  
+  <!-- Main Header -->
+  <header class="main-header">
+    <div class="main-header-inner">
+      <div class="site-title">National Immunisation & Ayurveda Portal</div>
+      <nav class="main-nav">
+        <ul>
+          <li><a href="javascript:void(0)" onclick="showPage('home')">Home</a></li>
+          <li><a href="javascript:void(0)" onclick="showPage('immunisation')">Immunisation Schedule</a></li>
+          <li><a href="javascript:void(0)" onclick="showPage('vaccine')">Vaccine Information</a></li>
+          <li><a href="javascript:void(0)" onclick="showPage('centers')">Vaccination Centers</a></li>
+          <li><a href="javascript:void(0)" onclick="showPage('resources')">Resources</a></li>
+          <li><a href="javascript:void(0)" onclick="showPage('ayurveda')">Ayurveda & Wellness</a></li>
+        </ul>
+      </nav>
     </div>
-
-</div>
+  </header>
+  
+  <!-- Search Container -->
+  <div class="search-container">
+    <div class="search-inner">
+      <div class="search-box">
+        <input type="text" placeholder="Search for information on vaccines, schedules, centers, Ayurveda..." />
+        <button>Search</button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Page Container -->
+  <div id="page-container">
+    <!-- Home Page -->
+    <section id="home" class="page active">
+      <!-- Hero Section -->
+      <section class="hero-section" style="background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('/api/placeholder/1200/400') center/cover; height: 400px; display: flex; align-items: center; margin-bottom: 40px; border-radius: 10px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+        <div class="hero-content" style="background-color: rgba(255,255,255,0.9); padding: 30px; max-width: 550px; margin-left: 50px; border-radius: 8px; box-shadow: 0 5px 15px rgba(0,0,0,0.1);">
+          <h1 style="color: var(--primary); margin-bottom: 15px; font-size: 2.2rem;">Swasth Bharat, Surakshit Bharat</h1>
+          <p style="margin-bottom: 20px; font-size: 1.1rem;">Protect yourself and your family with timely vaccination and holistic wellness approaches. Explore both modern immunisation and time-tested Ayurvedic remedies for a healthier future.</p>
+          <a href="javascript:void(0)" class="btn" onclick="showPage('centers')">Find Vaccination Center Near You</a>
+        </div>
+      </section>
+      
+      <!-- National Immunisation Programmes Info Cards -->
+      <div class="section-title">
+        <h2>National Immunisation Programmes</h2>
+      </div>
+      <section class="info-cards">
+        <div class="card">
+          <div class="card-img">
+            <img src="/api/placeholder/280/180" alt="Universal Immunisation Programme" />
+          </div>
+          <div class="card-content">
+            <h3>Universal Immunisation Programme</h3>
+            <p>India's flagship programme providing free vaccines against preventable diseases to all children across the country.</p>
+            <a href="javascript:void(0)" class="btn" onclick="showPage('vaccine')">Learn More</a>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-img">
+            <img src="/api/placeholder/280/180" alt="COVID-19 Vaccination" />
+          </div>
+          <div class="card-content">
+            <h3>COVID-19 Vaccination</h3>
+            <p>Information about COVID-19 vaccines, eligibility, availability, and nationwide vaccination progress.</p>
+            <a href="javascript:void(0)" class="btn" onclick="showPage('vaccine')">COVID-19 Details</a>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-img">
+            <img src="/api/placeholder/280/180" alt="Mission Indradhanush" />
+          </div>
+          <div class="card-content">
+            <h3>Mission Indradhanush</h3>
+            <p>Special initiative to immunize all children under two years of age and pregnant women against preventable diseases.</p>
+            <a href="javascript:void(0)" class="btn" onclick="showPage('immunisation')">Programme Details</a>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-img">
+            <img src="/api/placeholder/280/180" alt="Pulse Polio" />
+          </div>
+          <div class="card-content">
+            <h3>Pulse Polio Programme</h3>
+            <p>India's successful campaign to eliminate polio by vaccinating all children under five years against the disease.</p>
+            <a href="javascript:void(0)" class="btn" onclick="showPage('immunisation')">Know More</a>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Stats Section -->
+      <section class="stats-section" style="background-color: var(--primary); color: var(--white); padding: 60px 0; margin: 50px 0; text-align: center;">
+        <div class="stats-container" style="max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 30px;">
+          <div class="stat-item">
+            <div class="stat-number" style="font-size: 3rem; font-weight: bold;">27M+</div>
+            <div class="stat-label" style="font-size: 1.1rem;">Children Immunised Annually</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number" style="font-size: 3rem; font-weight: bold;">97%</div>
+            <div class="stat-label" style="font-size: 1.1rem;">Vaccination Coverage</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number" style="font-size: 3rem; font-weight: bold;">12</div>
+            <div class="stat-label" style="font-size: 1.1rem;">Preventable Diseases Targeted</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-number" style="font-size: 3rem; font-weight: bold;">29,000+</div>
+            <div class="stat-label" style="font-size: 1.1rem;">Vaccination Centers</div>
+          </div>
+        </div>
+      </section>
+      
+      <!-- Featured Updates -->
+      <section class="featured-content" style="background-color: var(--white); padding: 40px; margin-bottom: 50px; border-radius: 10px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+        <h2 style="color: var(--primary); text-align: center; margin-bottom: 30px; position: relative; padding-bottom: 15px;">Important Updates</h2>
+        <div class="featured-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 25px;">
+          <div class="featured-item" style="background-color: #f9f9f9; padding: 25px; border-radius: 8px; box-shadow: 0 3px 10px rgba(0,0,0,0.05); border-left: 3px solid var(--primary);">
+            <h3>National Immunisation Day</h3>
+            <p>The next National Immunisation Day for Polio vaccination is scheduled for April 10, 2025. Ensure all children under 5 years receive the oral polio vaccine.</p>
+          </div>
+          <div class="featured-item" style="background-color: #f9f9f9; padding: 25px; border-radius: 8px; box-shadow: 0 3px 10px rgba(0,0,0,0.05); border-left: 3px solid var(--primary);">
+            <h3>New Pneumococcal Vaccine</h3>
+            <p>The indigenous Pneumococcal Conjugate Vaccine has been added to the Universal Immunisation Programme, protecting children against pneumonia.</p>
+          </div>
+          <div class="featured-item" style="background-color: #f9f9f9; padding: 25px; border-radius: 8px; box-shadow: 0 3px 10px rgba(0,0,0,0.05); border-left: 3px solid var(--primary);">
+            <h3>Mobile Vaccination Units</h3>
+            <p>Mobile vaccination units are now serving remote areas across 18 states, bringing immunisation services closer to underserved communities.</p>
+          </div>
+          <div class="featured-item" style="background-color: #f9f9f9; padding: 25px; border-radius: 8px; box-shadow: 0 3px 10px rgba(0,0,0,0.05); border-left: 3px solid var(--primary);">
+            <h3>Digital Vaccination Records</h3>
+            <p>Access your family's vaccination records through the CoWIN platform or the UMANG app. Digital certificates are now available for all vaccines.</p>
+          </div>
+        </div>
+      </section>
+    </section>
     
-</div>
+    <!-- Immunisation Schedule Page -->
+    <section id="immunisation" class="page">
+      <div class="section-title">
+        <h2>Immunisation Schedule</h2>
+      </div>
+      <div class="page-content">
+        <p>Details about the immunisation schedule for various age groups will be provided here. [Content Coming Soon]</p>
+      </div>
+    </section>
+    
+    <!-- Vaccine Information Page -->
+    <section id="vaccine" class="page">
+      <div class="section-title">
+        <h2>Vaccine Information</h2>
+      </div>
+      <div class="page-content">
+        <p>All the relevant information regarding various vaccines, their efficacy and safety data, are available here. [Content Coming Soon]</p>
+      </div>
+    </section>
+    
+    <!-- Vaccination Centers Page -->
+    <section id="centers" class="page">
+      <div class="section-title">
+        <h2>Vaccination Centers</h2>
+      </div>
+      <div class="page-content">
+        <p>Find vaccination centers across India. You can use our locator tool to search by location. [Content Coming Soon]</p>
+      </div>
+    </section>
+    
+    <!-- Resources Page -->
+    <section id="resources" class="page">
+      <div class="section-title">
+        <h2>Vaccine Resources</h2>
+      </div>
+      <div class="resources-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; margin-bottom: 50px;">
+        <div class="resource-item" style="background-color: var(--white); border-radius: 10px; padding: 25px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+          <h3>For Parents & Caregivers</h3>
+          <ul>
+            <li><a href="#">Child Immunisation Schedule</a></li>
+            <li><a href="#">Vaccine Safety Information</a></li>
+            <li><a href="#">FAQs on Childhood Vaccination</a></li>
+            <li><a href="#">Maternal Immunisation</a></li>
+            <li><a href="#">Finding Vaccination Records</a></li>
+          </ul>
+        </div>
+        <div class="resource-item" style="background-color: var(--white); border-radius: 10px; padding: 25px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+          <h3>For Healthcare Workers</h3>
+          <ul>
+            <li><a href="#">National Immunisation Guidelines</a></li>
+            <li><a href="#">Cold Chain Management</a></li>
+            <li><a href="#">AEFI Reporting System</a></li>
+            <li><a href="#">Training Materials</a></li>
+            <li><a href="#">Immunisation Handbook</a></li>
+          </ul>
+        </div>
+        <div class="resource-item" style="background-color: var(--white); border-radius: 10px; padding: 25px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+          <h3>Disease Information</h3>
+          <ul>
+            <li><a href="#">Tuberculosis & BCG Vaccine</a></li>
+            <li><a href="#">Measles, Mumps & Rubella</a></li>
+            <li><a href="#">Hepatitis B</a></li>
+            <li><a href="#">Diphtheria, Pertussis & Tetanus</a></li>
+            <li><a href="#">Japanese Encephalitis</a></li>
+          </ul>
+        </div>
+        <div class="resource-item" style="background-color: var(--white); border-radius: 10px; padding: 25px; box-shadow: 0 5px 15px rgba(0,0,0,0.05);">
+          <h3>Tools & Services</h3>
+          <ul>
+            <li><a href="#">Vaccination Center Locator</a></li>
+            <li><a href="#">Vaccination Reminder Service</a></li>
+            <li><a href="#">Digital Certificate Download</a></li>
+            <li><a href="#">Adverse Event Reporting</a></li>
+            <li><a href="#">Vaccination Coverage Dashboard</a></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+    
+    <!-- Expanded Ayurveda & Wellness Page -->
+    <section id="ayurveda" class="page">
+      <div class="section-title">
+        <h2>Ayurveda & Holistic Wellness</h2>
+      </div>
+      <div class="page-content">
+        <p>Embrace the ancient wisdom of Ayurveda fused with modern technology. Our platform redefines wellness by integrating AI-driven diagnostics, immersive experiences, and personalized e-commerce—all centered around traditional Ayurvedic principles.</p>
+      </div>
+      
+      <!-- Advanced Digital Diagnostics Section -->
+      <div class="ayurveda-section">
+        <h3>Naadi Pariksha 2.0: Advanced Digital Diagnostics</h3>
+        <p>Reimagining the ancient art of Naadi Pariksha, our system integrates sensor data and real-time analytics to provide evidence-based health reports. Experience enhanced biohacking innovations and secure health data management like never before.</p>
+      </div>
+      
+      <!-- Immersive User Experience Section -->
+      <div class="ayurveda-section">
+        <h3>X-Verse Ayurveda Experience</h3>
+        <p>Step into an immersive 3D “X-Verse” environment that blends an Apple-like UI/UX with interactive visualizations of your wellness journey. Explore dynamic simulations that illustrate the synergy between traditional Ayurvedic practices and modern diagnostic tools.</p>
+      </div>
+      
+      <!-- Integrated E-Commerce & Lifestyle Guidance Section -->
+      <div class="ayurveda-section">
+        <h3>Ayurvedic E-Shop & Lifestyle Guidance</h3>
+        <p>Discover personalized product recommendations—from herbal supplements to organic skincare—tailored to your unique constitution. Our e-commerce interface also offers lifestyle and dietary guidance to help you achieve balanced health.</p>
+      </div>
+      
+      <!-- Consultation & AI-Powered Assistance Section -->
+      <div class="ayurveda-section">
+        <h3>AI-Powered Ayurveda Consultations</h3>
+        <p>Book consultations with experienced Ayurvedic practitioners or engage with our conversational AI for real-time health advice. Receive continuously updated insights, ensuring that your wellness strategy is always evidence-based and personalized.</p>
+      </div>
+      
+      <!-- Future-Proof Ecosystem Section -->
+      <div class="ayurveda-section">
+        <h3>Future-Proof Ayurveda Ecosystem</h3>
+        <p>Our platform is built to evolve. With a scalable ecosystem roadmap, community-driven insights, and optional IoT integration, we’re redefining what it means to achieve long-term holistic wellness.</p>
+      </div>
+      
+      <!-- Ayurvedic Immunity Boosters & Remedies -->
+      <div class="ayurveda-section">
+        <h3>Ayurvedic Immunity Boosters & Remedies</h3>
+        <p>Complement your vaccination and modern treatments with natural Ayurvedic remedies:</p>
+        <ul>
+          <li><strong>Ashwagandha:</strong> Boosts immunity and reduces stress.</li>
+          <li><strong>Tulsi (Holy Basil):</strong> Known for its antiviral and antibacterial properties.</li>
+          <li><strong>Giloy:</strong> Supports detoxification and enhances natural defense mechanisms.</li>
+          <li><strong>Triphala:</strong> A traditional formulation that aids in digestion and overall health.</li>
+          <li><strong>Neem:</strong> Promotes skin health and offers natural antibacterial benefits.</li>
+        </ul>
+        <p>These time-honoured remedies can act as complementary measures alongside modern immunisation strategies to enhance overall wellness.</p>
+      </div>
+    </section>
+  </div>
+  
+  <!-- Footer -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h3>About</h3>
+          <ul>
+            <li><a href="#">Overview</a></li>
+            <li><a href="#">Mission</a></li>
+            <li><a href="#">Team</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3>Services</h3>
+          <ul>
+            <li><a href="#">Immunisation</a></li>
+            <li><a href="#">Ayurveda & Wellness</a></li>
+            <li><a href="#">Health Programs</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3>Support</h3>
+          <ul>
+            <li><a href="#">FAQs</a></li>
+            <li><a href="#">Help Desk</a></li>
+            <li><a href="#">Contact Us</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom" style="text-align: center; font-size: 0.9rem; color: rgba(255,255,255,0.7); border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px;">
+        © 2025 Ministry of Health and Family Welfare, India. All rights reserved.
+      </div>
+    </div>
+  </footer>
+  
+  <!-- Chatbot Toggle Button -->
+  <button id="chatbot-toggle" onclick="toggleChatbot()">Chat</button>
+  
+  <!-- Chatbot Container -->
+  <div id="chatbot">
+    <div id="chatbot-header">
+      <span>Chatbot</span>
+      <span onclick="toggleChatbot()" style="cursor:pointer;">✖</span>
+    </div>
+    <div id="chatbot-messages"></div>
+    <div id="chatbot-prompts">
+      <button onclick="sendPrompt('Tell me about vaccine info')">Vaccine Info</button>
+      <button onclick="sendPrompt('I need Ayurveda info')">Ayurveda Info</button>
+      <button onclick="sendPrompt('What is the immunisation schedule?')">Immunisation Schedule</button>
+      <button onclick="sendPrompt('Help me find vaccination centers')">Find Centers</button>
+    </div>
+    <div id="chatbot-input">
+      <input type="text" id="chatInput" placeholder="Type your message..." />
+      <button onclick="handleUserMessage()">Send</button>
+    </div>
+  </div>
+  
+  <!-- JavaScript for Navigation & Chatbot -->
+  <script>
+    // Page Navigation
+    function showPage(pageId) {
+      const pages = document.querySelectorAll('.page');
+      pages.forEach(page => page.classList.remove('active'));
+      document.getElementById(pageId).classList.add('active');
+      window.scrollTo(0, 0);
+    }
+    
+    // Chatbot Toggle
+    function toggleChatbot() {
+      const chatbot = document.getElementById('chatbot');
+      chatbot.style.display = (chatbot.style.display === 'flex') ? 'none' : 'flex';
+    }
+    
+    // Add message to chatbot window
+    function addMessage(sender, message) {
+      const messages = document.getElementById('chatbot-messages');
+      const msgDiv = document.createElement('div');
+      msgDiv.style.marginBottom = '10px';
+      msgDiv.innerHTML = '<strong>' + sender + ':</strong> ' + message;
+      messages.appendChild(msgDiv);
+      messages.scrollTop = messages.scrollHeight;
+    }
+    
+    // Handle pre-designed prompt click
+    function sendPrompt(promptText) {
+      addMessage('You', promptText);
+      setTimeout(() => {
+        addMessage('Chatbot', 'You asked about "' + promptText + '". For more details, please visit the relevant section on our portal.');
+      }, 500);
+    }
+    
+    // Handle user message from input box
+    function handleUserMessage() {
+      const input = document.getElementById('chatInput');
+      const text = input.value.trim();
+      if(text !== '') {
+        addMessage('You', text);
+        setTimeout(() => {
+          addMessage('Chatbot', 'Thank you for your message. Please check our sections for more details.');
+        }, 500);
+        input.value = '';
+      }
+    }
+  </script>
 </body>
 </html>
