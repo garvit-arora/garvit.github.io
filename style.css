@@ -1,0 +1,22 @@
+
+body{
+    line-height: 20px;
+}
+.container{
+    background-color: red;
+    width: 60vw;
+    height: 1000px;
+    line-height: 10px;
+    
+}
+.file{
+    display: flex;
+    justify-content: center;
+}  
+.header{
+    margin: 30px;
+}
+.location{
+    position: relative;
+    left:40px;
+}
