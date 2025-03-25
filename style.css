@@ -1,22 +1,127 @@
+body {
+    background-color: black;
+    color: white;
+    font-family: 'Trebuchet MS', sans-serif;
+    text-align: center;
+    animation: fadein 2s ease-out;
+}
 
-body{
-    line-height: 20px;
+@keyframes fadein {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
 }
-.container{
-    background-color: red;
-    width: 60vw;
-    height: 1000px;
-    line-height: 10px;
-    
+
+.name1 {
+    margin-top: 20vh;
+    font-size: 80px;
+    font-weight: 600;
+    animation: slidein 1.5s ease-out;
 }
-.file{
+
+@keyframes slidein {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(0); }
+}
+
+.skills-section {
+    margin-top: 30px;
+}
+
+.skill-list {
+    list-style: none;
     display: flex;
     justify-content: center;
-}  
-.header{
-    margin: 30px;
+    gap: 20px;
+    padding: 0;
 }
-.location{
+
+.skill-list li {
+    background: white;
+    color: black;
+    padding: 10px 15px;
+    border-radius: 5px;
+    transition: transform 0.3s, background 0.3s;
+}
+
+.skill-list li:hover {
+    transform: scale(1.1);
+}
+
+.github {
+    display: flex;
+    gap: 50px;
+    margin-top: 50px;
+    justify-content: center;
+}
+
+.githubheading {
+    font-size: 100px;
     position: relative;
-    left:40px;
+    animation: githubcome 5s infinite;
+}
+
+@keyframes githubcome {
+    0% { color: red; }
+    10% { color: yellow; }
+    20% { color: white; }
+    30% { color: greenyellow; }
+    40% { color: aqua; }
+    50% { color: violet; }
+    60% { color: aliceblue; }
+    70% { color: orange; }
+    80% { color: yellow; }
+    90% { color: greenyellow; }
+    100% { color: aqua; }
+}
+
+.project11 {
+    text-decoration: none;
+    display: block;
+    width: fit-content;
+}
+
+.project1 {
+    border: 2px solid;
+    border-color: -moz-linear-gradient(top, #555555, #111111);
+    padding: 15px 20px;
+    border-radius: 8px;
+    color: white;
+    text-align: center;
+    transition: transform 0.3s, background 0.3s;
+}
+
+.project11:hover {
+    transform: scale(1.1);
+}
+
+.projects {
+    flex-direction: row;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.projectheading {
+    font-size: 80px;
+}
+.img1{
+    opacity: 0;
+    transform: translateX(-100%);
+    animation: slideIn 1.5s forwards ease-out;
+    width: 200px;
+    border-radius: 200px;
+    border: 2px solid black;
+}
+
+@keyframes slideIn {
+    0% {
+        opacity: 0;
+        transform: translateX(200%);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0%);
+    }
 }
