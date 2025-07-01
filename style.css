@@ -27,6 +27,18 @@
   font-weight: 500;
   font-style: normal;
 }
+.myname{
+  font-family: "Fira Sans", sans-serif;
+  font-weight: 600;
+  font-size: 50px;
+  text-align: center;
+  margin-left: 20px;
+  margin-top: 10px;
+  background: linear-gradient(145deg, #333, #666, #000);
+  -webkit-background-clip: text;
+  letter-spacing: 1px;
+  
+}
 
 .fira-sans-semibold {
   font-family: "Fira Sans", sans-serif;
@@ -136,7 +148,7 @@ body {
 }
 .container {
   width: 44vw;
-  height: 13vh;
+  /* height: 13vh; */
   background-color: black;
   color: white;
   font-size: 20px;
@@ -145,7 +157,7 @@ body {
 }
 .container2 {
   width: 20vw;
-  height: 100%;
+  /* height: 100%; */
   border: 1px solid black;
   margin-left: 4px;
 }
@@ -162,11 +174,17 @@ main {
 .nameofme {
   font-size: 50px;
   margin-top: 0;
+  /* animation: typewriter 4s steps(30,end) forwards, blink 0.75s step-end infinite; */
+  overflow: hidden;
 }
+/* @keyframes typewriter{
+  from{width: 0px};
+  to{width:25vh }
+} */
 .maincontent {
   width: 60vw;
   /* border-right: 2px solid black; */
-  height: 100vh;
+  /* height: 100vh; */
 }
 .pic {
   text-align: left;
@@ -193,7 +211,7 @@ main {
 .rightcont{
   text-align: center;
   width: 20vw;
-  margin: 0;
+  margin: 5px;
   padding: 0 10px;
   border: 2px solid black;
 }
@@ -208,9 +226,7 @@ main {
   text-align: center;
   padding: 20px;
 }
-.skills h2 {
-  /* margin-bottom: 20px; */
-}
+
 .footer{
   display: flex;
   flex-direction: column;
