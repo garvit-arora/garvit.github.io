@@ -145,6 +145,9 @@ body {
   gap: 3px;
   margin: 0;
 }
+.changefont{
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
 .container {
   width: 44vw;
   /* height: 13vh; */
@@ -156,9 +159,10 @@ body {
 }
 .container2 {
   width: 20vw;
-  /* height: 100%; */
+  height: 100%;
   border: 1px solid black;
   margin-left: 4px;
+  padding: 8px;
 }
 .digestheading {
   font-weight: 100px;
@@ -263,6 +267,9 @@ main {
 .experience h1{
   /* text-align: center; */
   margin: 20px;
+}
+.box1,.box2,.box3{
+  padding: 5px;
 }
 .experience{
   width: 30vw;
