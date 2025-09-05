@@ -24,23 +24,23 @@
     ```bash
     git clone https://github.com/your-username/portfolio.git
     cd portfolio
-    ```
+    
     2. Install Dependencies
     ```bash
     npm install
     # or
     yarn
-    ```
+    
     3. Run the development server:
     ```bash
     npm run dev
     # or
     yarn dev
-    ```
+    
     4. Open the app in your browser:
     ```bash
     http://localhost:5173
-    ```
+    
 
     ## 🤝 Contributing
 
