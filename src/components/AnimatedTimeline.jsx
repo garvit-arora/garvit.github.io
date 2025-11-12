@@ -8,7 +8,7 @@ export function AnimatedTimeline() {
 }
   const data = [
     {
-      title: "2025",
+      title: "Feb 2025",
       content: (
         <div>
           
