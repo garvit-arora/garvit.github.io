@@ -1,16 +1,20 @@
-import React from "react";
-import { useState } from "react";
-import "./App.css";
-import Header from "./components/Header/Header";
-import Home from "./components/Home/Home";
+import React from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useGSAP } from '@gsap/react';
+import HomePage from './pages/HomePage';
+import ProjectsPage from './pages/ProjectsPage';
 
-function App() {
+gsap.registerPlugin(ScrollTrigger, useGSAP);
+
+export default function App() {
   return (
-    <>
-      <Header />
-      <Home />
-    </>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/projects" element={<ProjectsPage />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
-
-export default App;
