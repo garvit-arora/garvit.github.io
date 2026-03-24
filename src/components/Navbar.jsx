@@ -58,7 +58,7 @@ const Navbar = () => {
 
   return (
     <>
-      <header style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 8000, padding: '20px 36px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: 'rgba(0,0,0,0.5)', backdropFilter: 'blur(16px)', WebkitBackdropFilter: 'blur(16px)', borderBottom: '1px solid rgba(255,255,255,0.04)' }}>
+      <header style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 8000, padding: '20px 36px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', background: open ? 'transparent' : 'rgba(0,0,0,0.5)', backdropFilter: open ? 'none' : 'blur(16px)', WebkitBackdropFilter: open ? 'none' : 'blur(16px)', borderBottom: open ? 'none' : '1px solid rgba(255,255,255,0.04)', transition: 'all 0.3s ease' }}>
         <a href="/" data-hover style={{ fontFamily: "'Antonio', sans-serif", fontSize: 18, fontWeight: 700, color: '#fff', textDecoration: 'none', letterSpacing: '-0.02em', textTransform: 'uppercase' }}>
           GARVIT<span style={{ color: '#D4FF00' }}>.</span>
         </a>
